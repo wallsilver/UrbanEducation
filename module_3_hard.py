@@ -7,27 +7,33 @@ def calculate_structure_sum(*args):
             sum += _type(i)
         else:
            sum += i
-    print(sum)
     return sum
 
 def _type (type_):
     sum_type=0
     for i in type_:
-        if isinstance(i, tuple) == True:
+        if isinstance(i, int) == True:
+            sum_type += i
+        elif isinstance(i, tuple) == True:
             sum_type += _tuple(i)
         elif isinstance(i, list) == True:
             sum_type += _list(i)
         elif isinstance(i, dict) == True:
             sum_type += _dict(i)
-        elif isinstance(type_, str) == True:
+        elif isinstance(i, str) == True:
             sum_type += len(i)
         else:
             print(type(i))
+    return sum_type
 
-def _tuple(tuple_):
+def _tuple(*tuple_):
     sum_tuple = 0
+    if len(tuple_) == 0:
+        return sum_tuple
     for j in tuple_:
-        if isinstance(j, int) != True:
+        if isinstance(j, dict) == True:
+            sum_tuple += _dict(j)
+        elif isinstance(j, int) != True:
             sum_tuple += _type(j)
         else:
             sum_tuple += j
