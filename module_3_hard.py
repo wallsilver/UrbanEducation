@@ -1,53 +1,51 @@
 def calculate_structure_sum(*args):
-    sum=0
+    sum_all=0
     for i in args:
-        if isinstance(i, str) == True:
-            sum += len(i)
-        elif isinstance(i, int) != True:
-            sum += _type(i)
+        if isinstance(i, str):
+            sum_all += len(i)
+        elif not isinstance(i, int):
+            sum_all += _type(i)
         else:
-           sum += i
-    return sum
+           sum_all += i
+    return sum_all
 
+# Обработчик типов
 def _type (type_):
     sum_type=0
     for i in type_:
-        if isinstance(i, int) == True:
-            sum_type += i
-        elif isinstance(i, tuple) == True:
+        if isinstance(i, tuple):
             sum_type += _tuple(i)
-        elif isinstance(i, list) == True:
+        elif isinstance(i, list):
             sum_type += _list(i)
-        elif isinstance(i, dict) == True:
+        elif isinstance(i, dict):
             sum_type += _dict(i)
-        elif isinstance(i, str) == True:
+        elif isinstance(i, str):
             sum_type += len(i)
         else:
-            print(type(i))
+            sum_type += i
     return sum_type
 
+# Обработчик картежей
 def _tuple(*tuple_):
     sum_tuple = 0
-    if len(tuple_) == 0:
-        return sum_tuple
     for j in tuple_:
-        if isinstance(j, dict) == True:
-            sum_tuple += _dict(j)
-        elif isinstance(j, int) != True:
+        if not isinstance(j, int):
             sum_tuple += _type(j)
         else:
             sum_tuple += j
     return sum_tuple
 
+# Обработчик списков
 def _list(list_):
     list_sum=0
     for i in list_:
-        if isinstance(i, int) != True:
+        if not isinstance(i, int):
             list_sum += _type(i)
         else:
             list_sum += i
     return list_sum
 
+# ОБработчик словарей
 def _dict(dict_):
     sum_dict=0
     for key in dict_:
