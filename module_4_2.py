@@ -1,12 +1,12 @@
-def test_function():
-    item = ''
-    def inner_function():
-        nonlocal item
-        item = "Я в области видимости функции test_function"
-        return item
-    print(inner_function())
-    return item
+def test_function(): # п. 1
+#    item = ''
+    def inner_function(): # п. 2
+        print ('Я в области видимости функции test_function') # п. 2
+        #    return item
+    inner_function() # п. 3
+#    return item
 
-print(test_function())
+#print(inner_function()) # п. 4 error - NameError: name 'inner_function' is not defined
 
-
+test_function() # Не входит в задание, но даёт смысл п.3
+inner_function() # п. 4
