@@ -9,4 +9,5 @@ def test_function(): # п. 1
 #print(inner_function()) # п. 4 error - NameError: name 'inner_function' is not defined
 
 test_function() # Не входит в задание, но даёт смысл п.3
-inner_function() # п. 4
+# inner_function() # п. 4. Выдаёт ошибку. С ошибкой ознакомился)
+
