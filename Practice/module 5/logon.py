@@ -31,9 +31,10 @@ if __name__ == '__main__':
         if choice == '2':
             user = User (login := input("Введите логин: "), password := input("Введите пароль: "), password_conf := input("Ведите пароль еще раз: "))
             if password != password_conf:
-                exit()
+                print('Пароли не совпадают, попробуйте ещё раз')
+                continue
             if login in database.data:
-                print('Пользователь уже существует. Выплните вход или зарегистрируйтесь с другим логином')
+                print('Пользователь уже существует. Выполните вход или зарегистрируйтесь с другим логином')
                 continue
             database.add_user(user.username, user.password)
         if choice == '3':
