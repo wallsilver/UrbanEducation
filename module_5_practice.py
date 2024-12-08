@@ -27,7 +27,18 @@
 После воспроизведения нужно выводить: "Конец видео"
 """
 class UrTube:
-    pass
+
+    def __init__(self,name,number_of_floors):
+        self.users = []  # (список объектов User)
+        self.videos = []  # (список объектов Video)
+        #self.current_user = User.__init__()  # (текущий пользователь, User)
+
+    def add (self, *video):
+        for i in video:
+            if i in self.videos:
+                continue
+            self.videos.append(i)
+
 
 """
 Каждый объект класса Video должен обладать следующими атрибутами и методами:
@@ -36,6 +47,7 @@ class UrTube:
 adult_mode(ограничение по возрасту, bool (False по умолчанию))
 """
 class Video:
+    #( title, duration, time_now = 0, adult_mode = False):
     pass
 
 """
@@ -43,7 +55,7 @@ class Video:
 
 Атриубуты: nickname(имя пользователя, строка), password(в хэшированном виде, число), age(возраст, число)
 """
-class User:
+class User: #(nickname, password, age)
     pass
 
 
@@ -64,34 +76,34 @@ ur.add(v1, v2)
 
 # Проверка поиска
 
-print(ur.get_videos('лучший'))
+#print(ur.get_videos('лучший'))
 
-print(ur.get_videos('ПРОГ'))
+#print(ur.get_videos('ПРОГ'))
 
 
 
 # Проверка на вход пользователя и возрастное ограничение
 
-ur.watch_video('Для чего девушкам парень программист?')
+#ur.watch_video('Для чего девушкам парень программист?')
 
-ur.register('vasya_pupkin', 'lolkekcheburek', 13)
+#ur.register('vasya_pupkin', 'lolkekcheburek', 13)
 
-ur.watch_video('Для чего девушкам парень программист?')
+#ur.watch_video('Для чего девушкам парень программист?')
 
-ur.register('urban_pythonist', 'iScX4vIJClb9YQavjAgF', 25)
+#ur.register('urban_pythonist', 'iScX4vIJClb9YQavjAgF', 25)
 
-ur.watch_video('Для чего девушкам парень программист?')
+#ur.watch_video('Для чего девушкам парень программист?')
 
 
 
 # Проверка входа в другой аккаунт
 
-ur.register('vasya_pupkin', 'F8098FM8fjm9jmi', 55)
+#ur.register('vasya_pupkin', 'F8098FM8fjm9jmi', 55)
 
-print(ur.current_user)
+#print(ur.current_user)
 
 
 
 # Попытка воспроизведения несуществующего видео
 
-ur.watch_video('Лучший язык программирования 2024 года!')
+#ur.watch_video('Лучший язык программирования 2024 года!')
