@@ -28,16 +28,23 @@
 """
 class UrTube:
 
-    def __init__(self,name,number_of_floors):
-        self.users = []  # (список объектов User)
-        self.videos = []  # (список объектов Video)
+    def __init__(self):
+        self.users = [] # (список объектов User)
+        self.videos = [] # (список объектов Video)
+#        current_user = User.nickname # (текущий пользователь, User)
         #self.current_user = User.__init__()  # (текущий пользователь, User)
+    def add (self,  *args):
+        for item in args:
+            if args.title not in Video:
+                self.videos.append(args.title)
+#                Video(args.title, args.duration, args.time_now = 0, args.adult_mode = False)
 
-    def add (self, *video):
-        for i in video:
-            if i in self.videos:
-                continue
-            self.videos.append(i)
+    def register(self, nickname, password, age):
+        if nickname in self.users:
+            print(f'Пользователь {nickname} уже существует')
+        else:
+            self.users.append(nickname)
+            User(nickname, hash(password),age)
 
 
 """
@@ -47,33 +54,31 @@ class UrTube:
 adult_mode(ограничение по возрасту, bool (False по умолчанию))
 """
 class Video:
-    #( title, duration, time_now = 0, adult_mode = False):
-    pass
+    def __init__(self, title, duration, time_now = 0, adult_mode = False):
+        self.title = title
+        self.duration = duration
+        self.time_now = time_now
+        self. adult_mode = adult_mode
+
+        
 
 """
 Каждый объект класса User должен обладать следующими атрибутами и методами:
 
 Атриубуты: nickname(имя пользователя, строка), password(в хэшированном виде, число), age(возраст, число)
 """
-class User: #(nickname, password, age)
-    pass
+class User:
+    def __init__(self,nickname, password, age):
+        self.nickname = nickname
+        self.password = password
+        self.age = age
 
-
-
-ur = UrTube()
-
-v1 = Video('Лучший язык программирования 2024 года', 200)
-
-v2 = Video('Для чего девушкам парень программист?', 10, adult_mode=True)
-
-
-
+if __name__ == '__main__':
+    ur = UrTube()
+    v1 = Video('Лучший язык программирования 2024 года', 200)
+    v2 = Video('Для чего девушкам парень программист?', 10, adult_mode=True)
 # Добавление видео
-
-ur.add(v1, v2)
-
-
-
+    ur.add(v1, v2)
 # Проверка поиска
 
 #print(ur.get_videos('лучший'))
