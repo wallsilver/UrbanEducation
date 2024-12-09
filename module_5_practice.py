@@ -34,10 +34,19 @@ class UrTube:
 #        current_user = User.nickname # (текущий пользователь, User)
         #self.current_user = User.__init__()  # (текущий пользователь, User)
     def add (self,  *args):
-        for item in args:
-            if args.title not in Video:
-                self.videos.append(args.title)
-#                Video(args.title, args.duration, args.time_now = 0, args.adult_mode = False)
+        i = 0
+        while True:
+          if args[i].title not in self.videos:
+                self.videos.append(args[i].title)
+                if len(args)-1 == i:
+                    break
+                else:
+                    i+=1
+    def get_videos(self, serch_title):
+        for i in self.videos:
+            if serch_title.lower() in i.lower():
+                print(i)
+
 
     def register(self, nickname, password, age):
         if nickname in self.users:
@@ -81,9 +90,9 @@ if __name__ == '__main__':
     ur.add(v1, v2)
 # Проверка поиска
 
-#print(ur.get_videos('лучший'))
+print(ur.get_videos('лучший'))
 
-#print(ur.get_videos('ПРОГ'))
+print(ur.get_videos('ПРОГ'))
 
 
 
