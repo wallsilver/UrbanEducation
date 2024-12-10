@@ -31,8 +31,12 @@ class UrTube:
     def __init__(self):
         self.users = [] # (список объектов User)
         self.videos = [] # (список объектов Video)
-#        current_user = User.nickname # (текущий пользователь, User)
+        self.current_user = None # (текущий пользователь, User)
         #self.current_user = User.__init__()  # (текущий пользователь, User)
+
+    #def __str__(self, print_search):
+
+
     def add (self,  *args):
         i = 0
         while True:
@@ -42,10 +46,12 @@ class UrTube:
                     break
                 else:
                     i+=1
-    def get_videos(self, serch_title):
+    def get_videos(self, search_title):
+        search_video = []
         for i in self.videos:
-            if serch_title.lower() in i.lower():
-                print(i)
+            if search_title.lower() in i.lower():
+                search_video.append(i)
+        return search_video
 
 
     def register(self, nickname, password, age):
@@ -54,6 +60,12 @@ class UrTube:
         else:
             self.users.append(nickname)
             User(nickname, hash(password),age)
+            self.current_user = nickname
+
+
+    def watch_video(self,cinema):
+        if self.current_user == None:
+            print('Войдите в аккаунт, чтобы смотреть видео')
 
 
 """
@@ -81,6 +93,7 @@ class User:
         self.nickname = nickname
         self.password = password
         self.age = age
+        print(self.age)
 
 if __name__ == '__main__':
     ur = UrTube()
@@ -98,26 +111,26 @@ print(ur.get_videos('ПРОГ'))
 
 # Проверка на вход пользователя и возрастное ограничение
 
-#ur.watch_video('Для чего девушкам парень программист?')
+ur.watch_video('Для чего девушкам парень программист?')
 
-#ur.register('vasya_pupkin', 'lolkekcheburek', 13)
+ur.register('vasya_pupkin', 'lolkekcheburek', 13)
 
-#ur.watch_video('Для чего девушкам парень программист?')
+ur.watch_video('Для чего девушкам парень программист?')
 
-#ur.register('urban_pythonist', 'iScX4vIJClb9YQavjAgF', 25)
+ur.register('urban_pythonist', 'iScX4vIJClb9YQavjAgF', 25)
 
-#ur.watch_video('Для чего девушкам парень программист?')
+ur.watch_video('Для чего девушкам парень программист?')
 
 
 
 # Проверка входа в другой аккаунт
 
-#ur.register('vasya_pupkin', 'F8098FM8fjm9jmi', 55)
+ur.register('vasya_pupkin', 'F8098FM8fjm9jmi', 55)
 
-#print(ur.current_user)
+print(ur.current_user)
 
 
 
 # Попытка воспроизведения несуществующего видео
 
-#ur.watch_video('Лучший язык программирования 2024 года!')
+ur.watch_video('Лучший язык программирования 2024 года!')
