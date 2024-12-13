@@ -26,14 +26,18 @@
 выводиться сообщение: "Вам нет 18 лет, пожалуйста покиньте страницу"
 После воспроизведения нужно выводить: "Конец видео"
 """
+#from site import USER_BASE
+from time import sleep
+
+
 class UrTube:
 
     def __init__(self):
         self.users = [] # (список объектов User)
         self.videos = [] # (список объектов Video)
         self.current_user = None # (текущий пользователь, User)
-        #self.current_user = User.__init__()  # (текущий пользователь, User)
-
+        self.current_video = None  # (текущее видео)
+        self.user = None
     #def __str__(self, print_search):
 
 
@@ -59,14 +63,26 @@ class UrTube:
             print(f'Пользователь {nickname} уже существует')
         else:
             self.users.append(nickname)
-            User(nickname, hash(password),age)
+            self.user = User(nickname, hash(password),age)
             self.current_user = nickname
+            # self.current_user = nickname
 
 
     def watch_video(self,cinema):
+        self.current_video = Video.find(Video,cinema)
         if self.current_user == None:
             print('Войдите в аккаунт, чтобы смотреть видео')
-
+        elif cinema in self.videos:
+            if self.current_video.adult_mode == True and self.user.age < 18:
+                print('Вам нет 18 лет, пожалуйста покиньте страницу')
+            if self.current_video.adult_mode == False or \
+            (self.current_video.adult_mode == True and self.user.age > 18):
+                for i in range(self.current_video.duration):
+                    self.current_video.time_now += 1
+                    print (self.current_video.time_now,end=' ')
+                    sleep(1)
+                print('Конец видео')
+                self.current_video.time_now = 0
 
 """
 Каждый объект класса Video должен обладать следующими атрибутами и методами:
@@ -75,13 +91,18 @@ class UrTube:
 adult_mode(ограничение по возрасту, bool (False по умолчанию))
 """
 class Video:
+    VideoBase = []
     def __init__(self, title, duration, time_now = 0, adult_mode = False):
         self.title = title
         self.duration = duration
         self.time_now = time_now
         self. adult_mode = adult_mode
+        self.__class__.VideoBase.append(self)
 
-        
+    def find(self, cinema):
+        for i in range(len(self.VideoBase)):
+            if cinema == Video.VideoBase[i].title:
+                return Video.VideoBase[i]
 
 """
 Каждый объект класса User должен обладать следующими атрибутами и методами:
@@ -89,18 +110,25 @@ class Video:
 Атриубуты: nickname(имя пользователя, строка), password(в хэшированном виде, число), age(возраст, число)
 """
 class User:
+    UserBase = []
     def __init__(self,nickname, password, age):
         self.nickname = nickname
         self.password = password
         self.age = age
-        print(self.age)
+        self.__class__.UserBase.append(self)
+        #print(self.age)
 
-if __name__ == '__main__':
-    ur = UrTube()
-    v1 = Video('Лучший язык программирования 2024 года', 200)
-    v2 = Video('Для чего девушкам парень программист?', 10, adult_mode=True)
+    def find(self, nickname):
+        for nickname in User.UserBase:
+            if nickname in User.UserBase:
+                return self.age
+
+
+ur = UrTube()
+v1 = Video('Лучший язык программирования 2024 года', 200)
+v2 = Video('Для чего девушкам парень программист?', 10, adult_mode=True)
 # Добавление видео
-    ur.add(v1, v2)
+ur.add(v1, v2)
 # Проверка поиска
 
 print(ur.get_videos('лучший'))
