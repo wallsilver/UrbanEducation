@@ -27,16 +27,18 @@ import math
 
 class  Figure:
     sides_count = 0
-    def __init__(self, color, x):
+    def __init__(self, color, *args):
         __sides = []
         __color = []
-        self.__sides = [x]
-        if self.sides_count > 1:
-            for i in range(self.sides_count - 1):
-                self.__sides.append(x)
-        self.__color = color
-        self.filled = False
-
+        if len(args) == 1:
+            self.__sides = [args[0]]
+            if self.sides_count > 1:
+                for i in range(self.sides_count - 1):
+                    self.__sides.append(args[0])
+            self.__color = color
+            self.filled = False
+        else:
+            pass
     def __len__(self):
         if self.sides_count == 1:
             return self.__sides[0]
@@ -87,9 +89,9 @@ class  Figure:
 class Circle(Figure):
     sides_count = 1
 
-    def __init__(self, color, x):
-        super().__init__(color, x)
-        self.__radius =  x / 2 + math.pi
+    def __init__(self, color, *args):
+        super().__init__(color, *args)
+        self.__radius =  super().get_sides()[0] / 2 + math.pi
 
     def get_square(self):
         return math.pi * self.__radius * self.__radius
