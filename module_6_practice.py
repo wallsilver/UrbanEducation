@@ -35,10 +35,18 @@ class  Figure:
             if self.sides_count > 1:
                 for i in range(self.sides_count - 1):
                     self.__sides.append(args[0])
-            self.__color = color
-            self.filled = False
         else:
-            pass
+            if self.__is_valid_sides(*args) == True:
+                self.__sides = [args[0]]
+                for i in range(self.sides_count):
+                    self.__sides.append(args[i])
+            else:
+                self.__sides = [1]
+                for i in range(self.sides_count - 1):
+                    self.__sides.append(1)
+        self.__color = color
+        self.filled = False
+
     def __len__(self):
         if self.sides_count == 1:
             return self.__sides[0]
@@ -107,6 +115,8 @@ class Circle(Figure):
 """
 class Triangle(Figure):
     sides_count = 3
+    def __init__(self, color, *args):
+        super().__init__(color, *args)
 
     def get_square(self, a, b, c):
         p = (a+ b +c) / 2
@@ -122,8 +132,8 @@ class Triangle(Figure):
 """
 class Cube(Figure):
     sides_count = 12
-    def __init__(self, color, x):
-        super().__init__(color, x)
+    def __init__(self, color, *args):
+        super().__init__(color, *args)
 
     def get_volume(self):
         return super().get_sides()[0] ** 3
@@ -162,3 +172,8 @@ print(triangle1.get_sides())
 print(len(triangle1))
 
 print(len(cube1))
+circle2 = Circle((200, 200, 100), 10, 10)
+cube2 = Cube((222, 35, 130), 6, 5, 3, 4, 8, 9, 5, 8, 4, 6, 3, 7)
+print(cube2.get_sides())
+print(circle2.get_sides())
+print(len(cube2))
