@@ -31,7 +31,7 @@ class  Figure:
         __sides = []
         __color = []
         self.__sides = [x]
-        if x > 1:
+        if self.sides_count > 1:
             for i in range(self.sides_count - 1):
                 self.__sides.append(x)
         self.__color = color
