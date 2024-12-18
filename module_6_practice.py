@@ -37,7 +37,7 @@ class  Figure:
                     self.__sides.append(args[0])
         else:
             if self.__is_valid_sides(*args) == True:
-                self.__sides = [args[0]]
+                self.__sides = []
                 for i in range(self.sides_count):
                     self.__sides.append(args[i])
             else:
@@ -174,6 +174,8 @@ print(len(triangle1))
 print(len(cube1))
 circle2 = Circle((200, 200, 100), 10, 10)
 cube2 = Cube((222, 35, 130), 6, 5, 3, 4, 8, 9, 5, 8, 4, 6, 3, 7)
+triangle2 = Triangle((241, 234, 65), 12, 7, 4)
 print(cube2.get_sides())
 print(circle2.get_sides())
 print(len(cube2))
+print(triangle2.get_sides())
