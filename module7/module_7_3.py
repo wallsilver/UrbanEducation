@@ -32,13 +32,14 @@ class WordsFinder:
     def get_all_words(self):
         import string
         self.all_words = {}
-        line_ = []
         for i in self.file_names:
             with open(i, encoding = 'utf-8') as file:
+                line_ = []
                 for line in file:
                     line = line.replace(',','').replace(':','').replace('.','').\
                     replace('=','').replace('!','').replace('?','').\
-                    replace(', ','').replace(' - ','').replace(':','').lower()
+                    replace(', ',' ').replace(' - ',' ').replace(':','').\
+                    replace('(','').replace(')','').lower()
                     line_.extend(line.split())
             self.all_words[i] = line_
         return self.all_words
@@ -59,5 +60,5 @@ for name, words in get_all_words().items():
 
 finder2 = WordsFinder('test_file.txt', 'test_file1.txt','test_file2.txt', 'test_file3.txt')
 print(finder2.get_all_words()) # Все слова
-#print(finder2.find('TEXT')) # 3 слово по счёту
+print(finder2.find('TEXT')) # 3 слово по счёту
 #print(finder2.count('teXT')) # 4 слова teXT в тексте всего
