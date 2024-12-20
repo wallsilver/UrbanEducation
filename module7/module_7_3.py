@@ -46,17 +46,17 @@ class WordsFinder:
         return self.all_words
 
     def find(self, word):
-        return_ = ''
+        return_ = {}
         for i in self.file_names:
             if word.lower() in self.all_words[i]:
-                return_ += (f'{i}:{self.all_words[i].index(word.lower()) + 1}\n')
+                return_[i] = self.all_words[i].index(word.lower()) + 1
         return return_
 
     def count(self, word):
-        return_ = ''
+        return_ = {}
         for i in self.file_names:
             if word.lower() in self.all_words[i]:
-                return_ += (f'{i}:{self.all_words[i].count(word.lower())}\n')
+                return_[i] = self.all_words[i].count(word.lower())
         return return_
 """
 В методах find и count пользуйтесь ранее написанным методом get_all_words для получения названия файла и списка его слов.
