@@ -75,3 +75,11 @@ finder3 = WordsFinder('test_file.txt', 'test_file1.txt', 'test_file2.txt', 'test
 print(finder3.get_all_words()) # Все слова
 print(finder3.find('TEXT')) # 3 слово по счёту в каждом файле
 print(finder3.count('teXT')) # 4 слова teXT в тексте всего в каждом файле
+
+# Предложенная проверка
+finder1 = WordsFinder('Walt Whitman - O Captain! My Captain!.txt',
+                      'Rudyard Kipling - If.txt',
+                      'Mother Goose - Monday’s Child.txt')
+print(finder1.get_all_words())
+print(finder1.find('the'))
+print(finder1.count('the'))
