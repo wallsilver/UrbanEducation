@@ -29,6 +29,8 @@ balance на соответствующее число и вывести на э
 import threading
 from threading import Lock
 from random import randint
+from time import sleep
+
 
 class Bank:
     def __init__(self):
@@ -41,23 +43,23 @@ class Bank:
                 self.lock.release()
             deposit =  randint(50, 500)
             self.balance += deposit
-            print(f'Пополнение: {deposit}. Баланс: {self.balance}. Операция {i+1} из 100.')
-
+            print(f'Пополнение: {deposit}. Баланс: {self.balance}')
+            #Event.wait(self,1)
+            sleep(0.001)
     def take(self):
         for i in range(100):
             take = randint(50, 500)
             print(f'Запрос на {take}')
             if take <= self.balance:
                 self.balance -= take
-                print(f'Снятие: {take}. Баланс: {self.balance}. Операция {i+1} из 100.')
+                print(f'Снятие: {take}. Баланс: {self.balance}')
             if take > self.balance:
-                print(f'Запрос отклонён, недостаточно средств. Операция {i+1} из 100.')
-                if th1: # Блокировать только если существует поток пополнения
-                    self.lock.acquire()
+                print(f'Запрос отклонён, недостаточно средств')
+                self.lock.acquire()
 
 
 bk = Bank()
-
+event = threading.Event()
 # Т.к. методы принимают self, в потоки нужно передать сам объект класса Bank
 th1 = threading.Thread(target=Bank.deposit, args=(bk,))
 th2 = threading.Thread(target=Bank.take, args=(bk,))
