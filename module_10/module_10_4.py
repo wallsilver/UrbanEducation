@@ -39,12 +39,12 @@ class Bank:
 
     def deposit(self):
         for i in range(100):
-            if self.balance >= 500 and self.lock.locked() == True:
-                self.lock.release()
             deposit =  randint(50, 500)
             self.balance += deposit
             print(f'Пополнение: {deposit}. Баланс: {self.balance}')
             #Event.wait(self,1)
+            if self.balance >= 500 and self.lock.locked() == True:
+                self.lock.release()
             sleep(0.001)
     def take(self):
         for i in range(100):
