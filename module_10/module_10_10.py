@@ -77,3 +77,4 @@ cafe.discuss_guests()
 
 for thr in Cafe.list_thr:
     thr.join()
+
