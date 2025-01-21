@@ -20,15 +20,16 @@ print(f'{end_time_l} (линейное)')
 # Многопроцессный
 start_time_m = datetime.now()
 if __name__ == '__main__':
-    processes = [Process(target=read_info, args=(filenames[i],)) for i in range(4)]
+  #  processes = [Process(target=read_info, args=(filenames[i],)) for i in range(4)]
+  #  for process in processes:
+   #     process.start()
+
+    pool = multiprocessing.Pool()
+    processes = pool.map(read_info, filenames)
     for process in processes:
         process.start()
-
-    with Pool() as p:
-        p.map(read_info(filenames[i]),range(4))
-        # Do something else while tasks are running
-        p.close()
-        p.join()
+    for process in processes:
+        process.join()
 
 end_time_m = datetime.now() - start_time_m
 print(f'{end_time_m} (многопроцессный)')
